@@ -1,8 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { uploadImageToCloudinary } from "../helper/helper";
+import Toast from "../components/ToastComponent";
+
 
 const ImageUploadPage = () => {
   const [image, setImage] = useState(null);
+  const [file, setFile] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
   const [selectedColor, setSelectedColor] = useState(null);
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
@@ -11,11 +18,37 @@ const ImageUploadPage = () => {
   const handleImage = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setFile(file)
       const imgURL = URL.createObjectURL(file);
       setImage(imgURL);
       setSelectedColor(null);
     }
   };
+
+
+  const handleNext = async () => {
+    if (!file) return;
+  
+    const result = await uploadImageToCloudinary(file);
+
+    console.log('success', result);
+    
+  
+    if (result.success) {
+      setToastMessage(result.message);
+      setShowToast(true);
+      localStorage.setItem("uploadedImage", result.imageUrl);
+      setTimeout(() => {
+        navigate("/user-type");
+      }, 1500);
+    } else {
+      setToastMessage(result.message);
+      setShowToast(true);
+    }
+  };
+  
+
+
 
   const handleImageClick = (e) => {
     const canvas = canvasRef.current;
@@ -108,11 +141,18 @@ const ImageUploadPage = () => {
 
         <button
           className="bg-green-500 text-white py-3 px-6 rounded-xl text-lg shadow-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-          onClick={() => navigate("/user-type")}
+          onClick={handleNext}
           disabled={!image}
         >
           Next
         </button>
+
+        {showToast && (
+  <Toast
+    message={toastMessage}
+    onClose={() => setShowToast(false)}
+  />
+)}
       </div>
     </div>
   );
