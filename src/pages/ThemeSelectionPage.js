@@ -6,15 +6,12 @@ const ThemeSelectionPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get the description passed from the previous page
   const eventDesc = location.state?.desc;
 
-  // Retrieve themes based on the event description
   const themes = eventValue[eventDesc] || [];
 
-  // Handle theme click
   const handleThemeClick = (theme) => {
-    navigate("/products", { state: { theme } }); // Pass selected theme to ProductPage
+    navigate("/products", { state: { theme } });
   };
 
   return (

@@ -6,7 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const clearCart = () => {
-    setCartItems([]); // Set the cart items to an empty array
+    setCartItems([]);
   };
   const addToCart = (product) => {
     console.log('product', product);

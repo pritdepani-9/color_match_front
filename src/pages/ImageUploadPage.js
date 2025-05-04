@@ -55,12 +55,10 @@ const ImageUploadPage = () => {
     const ctx = canvas.getContext("2d");
     const img = imageRef.current;
 
-    // Get bounding rect of image
     const rect = img.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Get pixel data
     const pixel = ctx.getImageData(x, y, 1, 1).data;
     const rgbToHex = (r, g, b) =>
       "#" +
@@ -122,7 +120,6 @@ const ImageUploadPage = () => {
               onClick={handleImageClick}
               className="mx-auto w-48 sm:w-72 lg:w-80 h-48 sm:h-72 lg:h-80 object-cover rounded-xl shadow-lg cursor-crosshair"
             />
-            {/* hidden canvas */}
             <canvas ref={canvasRef} className="hidden"></canvas>
           </div>
         )}

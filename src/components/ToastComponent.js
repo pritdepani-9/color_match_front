@@ -4,7 +4,7 @@ const Toast = ({ message, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 3000); // Toast will disappear after 3 seconds
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [onClose]);

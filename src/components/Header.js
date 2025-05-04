@@ -6,7 +6,6 @@ const Header = () => {
   const { cartItems, getTotalPrice } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // Redirect to the landing page when the title is clicked
   const handleLogoClick = () => {
     navigate("/");
   };

@@ -9,7 +9,6 @@ import EventDescriptionPage from "./pages/EventDescriptionPage";
 import ThemeSelectionPage from "./pages/ThemeSelectionPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
-import ColorPalette from "./pages/ColorPalette";
 
 
 function App() {

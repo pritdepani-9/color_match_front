@@ -1,19 +1,18 @@
 import React, { useState, useContext } from "react";
 import { CartContext } from "../cartContext";
 import { useNavigate } from "react-router-dom";
-import Toast from "../components/ToastComponent";  // Import the Toast component
+import Toast from "../components/ToastComponent";
 
 const CartPage = () => {
   const { cartItems, getTotalPrice, clearCart } = useContext(CartContext);
-  const [showToast, setShowToast] = useState(false); // State to handle toast visibility
+  const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    setShowToast(true); // Show the toast when the button is clicked
+    setShowToast(true);
     setTimeout(() => {
-      // navigate("/themes"); // Redirect to products page after 3 seconds
       clearCart()
-    }, 1500); // Redirect delay to allow toast to show
+    }, 1500); 
   };
 
   return (
@@ -23,7 +22,6 @@ const CartPage = () => {
           Cart Summary 🛒
         </h2>
 
-        {/* Cart Items */}
         <div className="space-y-4">
           {cartItems.length === 0 ? (
             <div className="text-center text-lg text-gray-600">
@@ -48,12 +46,10 @@ const CartPage = () => {
           )}
         </div>
 
-        {/* Total Price */}
         <div className="mt-8 text-xl font-semibold text-gray-800 text-center">
           <h3>Total: ₹{getTotalPrice()}</h3>
         </div>
 
-        {/* Checkout Button */}
         <div className="mt-6 text-center">
           <button
             className="bg-indigo-500 text-white py-3 px-8 rounded-xl text-lg font-semibold hover:bg-indigo-600 transition-all duration-300"
@@ -65,7 +61,6 @@ const CartPage = () => {
         </div>
       </div>
 
-      {/* Toast Notification */}
       {showToast && <Toast message="your order is placed successfully!!" onClose={() => setShowToast(false)} />}
     </div>
   );

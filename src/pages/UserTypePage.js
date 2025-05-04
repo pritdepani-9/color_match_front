@@ -21,7 +21,6 @@ const UserTypePage = () => {
           Choose your user type to get started with personalized options.
         </p>
 
-        {/* Uploaded Image Preview */}
         {uploadedImage && (
           <div className="mb-8">
             <img

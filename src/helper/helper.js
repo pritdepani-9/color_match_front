@@ -3,11 +3,11 @@ import axios from "axios";
 export const uploadImageToCloudinary = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", "color-match-image");
+  formData.append("upload_preset", process.env.REACT_APP_CLOUDNARY_PRESET_NAME ?? '' );
 
   try {
     const response = await axios.post(
-      "https://api.cloudinary.com/v1_1/dqezlqfvy/image/upload",
+      `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDNARY_NAME}/image/upload`,
       formData
     );
 
